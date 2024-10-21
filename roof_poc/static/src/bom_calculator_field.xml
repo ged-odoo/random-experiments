@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="roof_poc.BomCalculatorField">
+        <div class="btn btn-primary" t-on-click="openBomCalculator">
+            Open
+        </div>
+    </t>
+
+</templates>

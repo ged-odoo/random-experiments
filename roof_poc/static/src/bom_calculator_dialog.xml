@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t t-name="roof_poc.BomCalculatorDialog">
+        <Dialog title="'Bom Calculator'" size="'xl'" bodyClass="'p-0'">
+            <BomCalculator model="model"/>
+            <t t-set-slot="footer">
+                <button class="btn btn-primary" t-on-click="confirm">Confirm</button>
+                <button class="btn btn-secondary" t-on-click="() => this.props.close()">Discard</button>
+            </t>
+        </Dialog>
+    </t>
+
+</templates>

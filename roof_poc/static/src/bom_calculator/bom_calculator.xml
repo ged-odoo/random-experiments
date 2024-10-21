@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="roof_poc.BomCalculator">
+        <div class="bom-calculator">
+            <!-- menu bar -->
+            <div class="roof-menu p-1 d-flex align-items-center border-bottom">
+                <Dropdown>
+                    <button class="btn btn-secondary ms-1" tabindex="-1">
+                        File
+                    </button>
+                    <t t-set-slot="content">
+                        <DropdownItem onSelected="() => this.model.addRoof()">Add Roof</DropdownItem>
+                        <div role="separator" class="dropdown-divider"/>
+                        <t t-foreach="model.data.roofs" t-as="roof" t-key="roof.id">
+                            <DropdownItem onSelected="() => this.model.selectRoof(roof.id)">
+                                <span t-att-class="{'fw-bold': roof.id === model.currentRoof.id}"><t t-esc="roof.id"/>. <t t-esc="roof.name"/></span>
+                            </DropdownItem>
+                        </t>
+                        <div role="separator" class="dropdown-divider"/>
+                        <DropdownItem onSelected="() => this.model.deleteRoof()">Delete Roof</DropdownItem>
+                    </t>
+                </Dropdown>
+                <Dropdown>
+                    <button class="btn btn-secondary ms-1" tabindex="-1">
+                        Actions
+                    </button>
+                    <t t-set-slot="content">
+                        <DropdownItem onSelected.bind="createOrderLines">Create OrderLines</DropdownItem>
+                        <DropdownItem onSelected.bind="postImage">Post current roof as image</DropdownItem>
+                    </t>
+                </Dropdown>
+                <span class="px-1">
+                   <input t-model="model.currentRoof.name" tabindex="-1"/>
+                </span>
+                <div class="d-flex flex-grow-1 justify-content-end">
+                    <span class="btn mx-1" t-attf-class="{{state.activeTool === 'tool_1' ? 'btn-primary' : 'btn-secondary'}}" t-on-click="() => this.selectTool('tool_1')">Tool 1</span>
+                    <span class="btn mx-1" t-attf-class="{{state.activeTool === 'tool_2' ? 'btn-primary' : 'btn-secondary'}}" t-on-click="() => this.selectTool('tool_2')">Tool 2</span>
+                </div>
+            </div>
+            <!-- editor zone -->
+            <canvas t-ref="canvas" class="w-100" width="1000" height="600" t-on-click="onCanvasClick"/>
+        </div>
+    </t>
+
+</templates>
